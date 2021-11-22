@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Samples/Tobii Unity SDK for Desktop/4.1.0/Gaze Point Data/Example_GazePointData.unity
+    guid: c43802c7425e06a4d84124f09497f82b
   m_configObjects: {}
