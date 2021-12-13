@@ -202,6 +202,10 @@ namespace Tobii.Gaming.Examples.ActionGame
 
 		protected virtual void UpdateTransform()
 		{
+			Debug.Log("1");
+			Vector3 jin=new Vector3(Yaw,Pitch,0);
+			Debug.Log(jin);
+			Camera.main.transform.localEulerAngles=new Vector3(Yaw,Pitch,0);
 		}
 
 		protected virtual void Start()
@@ -258,7 +262,10 @@ namespace Tobii.Gaming.Examples.ActionGame
 			UpdateExtendedViewAngles();
 			Pitch = _gazePitchOffset + (_headPitchOffset * HeadRotationScalar);
 			Yaw = _gazeYawOffset + (_headYawOffset * HeadRotationScalar);
-			UpdateTransform();
+			//Debug.Log("1");
+			//Camera.main.transform.localEulerAngles=CameraWithExtendedView.transform.eulerAngles;
+			//UpdateCameraWithExtendedView(Camera.main);
+			//UpdateTransform();
 		}
 
 		private void UpdateHeadPose()

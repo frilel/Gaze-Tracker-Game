@@ -81,7 +81,7 @@ namespace Tobii.Gaming.Examples.ActionGame
 		
 		private void RenderPipelineManagerOnendCameraRendering(ScriptableRenderContext arg1, Camera arg2)
 		{
-			transform.localRotation = _localRotation;
+			//transform.localRotation = _localRotation;
 			PostResetCamera();
 		}
 		
