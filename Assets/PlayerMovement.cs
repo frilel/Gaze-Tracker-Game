@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject mainCamera;
     private bool isStarted=true;
 
+
     void Start()
     {
         Cursor.visible = false;

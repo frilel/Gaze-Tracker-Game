@@ -109,7 +109,7 @@ public class EyeLook : MonoBehaviour
         this.player.transform.rotation = Quaternion.Slerp(this.player.transform.rotation, playerRotationVector, Time.deltaTime * this.velocity * bodyTurnSpeed*this.speedFactor);
 		float camXrot=(transform.localEulerAngles.x>180?(transform.localEulerAngles.x-360):(transform.localEulerAngles.x))+xRotation;
 		camXrot = Mathf.Clamp(camXrot, -60f, 60f);
-		Debug.Log("xRot:"+xRotation +", camXrot:"+camXrot+", localRotation:"+transform.localEulerAngles.x);
+		//Debug.Log("xRot:"+xRotation +", camXrot:"+camXrot+", localRotation:"+transform.localEulerAngles.x);
         transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(new Vector3(camXrot,0f,0f)), Time.deltaTime*this.velocity*this.speedFactor);
 
 
