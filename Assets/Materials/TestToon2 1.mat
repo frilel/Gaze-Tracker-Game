@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TestToon2
+  m_Name: TestToon2 1
   m_Shader: {fileID: -6465566751694194690, guid: c8430468645ad423eb8b36c12b39fb4b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -146,8 +146,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_15b1d9d40bda46f38e0d7c01688ae036: {r: 0.9433962, g: 0.9278213, b: 0.91224635, a: 0}
-    - Color_234c71271b4840c4a60c5132df14901b: {r: 0.83303666, g: 0.8994796, b: 0.9056604, a: 0}
+    - Color_15b1d9d40bda46f38e0d7c01688ae036: {r: 0.6415094, g: 0.36900985, b: 0.16037735, a: 0}
+    - Color_234c71271b4840c4a60c5132df14901b: {r: 0.4528302, g: 0.27153727, b: 0.11320755, a: 0}
     - Color_23C9B10D: {r: 0.04561229, g: 0.14495295, b: 0.38679245, a: 0}
     - Color_A2AAE5B5: {r: 0.11372546, g: 0.62745106, b: 0.8352941, a: 0}
     - Color_b53b9321b6ad4c4ca456623ce014e5ef: {r: 0, g: 0, b: 0, a: 0}
