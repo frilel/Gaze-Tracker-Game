@@ -31,6 +31,7 @@ public class EyeLook : MonoBehaviour
     private int maxRect = 5;
     private int offset = 40;
     private int i;
+    private GameManager gameManager;
     public void Start()
     {
         this.player = GameObject.FindGameObjectWithTag("Player");
@@ -45,6 +46,7 @@ public class EyeLook : MonoBehaviour
             this.r[this.i] = new Rect((float)(this.i * this.offset) * this.ratio, (float)(this.i * this.offset), this.w - this.ratio * (float)this.offset * (float)this.i * 2f, this.h - (float)(this.offset * this.i * 2));
             this.i++;
         }
+        gameManager=FindObjectOfType<GameManager>();
     }
     public void Update()
     {
@@ -65,7 +67,7 @@ public class EyeLook : MonoBehaviour
     }
     public void LateUpdate()
     {
-        if (EyeLook.isActive)
+        if (EyeLook.isActive&&gameManager.gameStarted)
         {
             this.player.transform.rotation = this.lastRotation;
             //EyeXGazePoint lastGazePoint = this._gazePointDataComponent.LastGazePoint;
