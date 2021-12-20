@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TestToon2
+  m_Name: TestLerp
   m_Shader: {fileID: -6465566751694194690, guid: c8430468645ad423eb8b36c12b39fb4b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -120,7 +120,7 @@ Material:
     - Vector1_2EE2CB80: 0.1
     - Vector1_2d22bb51ac8f42dfa288928c16a9d9b1: 0.05
     - Vector1_874f52a69886454f8ccb6d91cea9aafc: 0.05
-    - Vector1_8bb4edeb1a014331a91fc4c8d6a21f6c: 0.2
+    - Vector1_8bb4edeb1a014331a91fc4c8d6a21f6c: 0
     - Vector1_a4f6e6d0aa174eed91e4eeb16c919a59: 0
     - Vector1_c84329d6d82549f3a5c4181396001838: 0
     - _AlphaClip: 0
@@ -150,10 +150,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_15b1d9d40bda46f38e0d7c01688ae036: {r: 0.9433962, g: 0.9278213, b: 0.91224635, a: 0}
-    - Color_234c71271b4840c4a60c5132df14901b: {r: 0.83303666, g: 0.8994796, b: 0.9056604, a: 0}
+    - Color_15b1d9d40bda46f38e0d7c01688ae036: {r: 0.754717, g: 0.4876268, b: 0.28123888, a: 0}
+    - Color_234c71271b4840c4a60c5132df14901b: {r: 0.8301887, g: 0.5148214, b: 0.23887502, a: 0}
     - Color_23C9B10D: {r: 0.04561229, g: 0.14495295, b: 0.38679245, a: 0}
-    - Color_342583449162484bbb50c1601107258f: {r: 0.21048418, g: 0.28798103, b: 0.8113208, a: 0}
+    - Color_342583449162484bbb50c1601107258f: {r: 0.6603774, g: 0, b: 0, a: 0}
     - Color_A2AAE5B5: {r: 0.11372546, g: 0.62745106, b: 0.8352941, a: 0}
     - Color_b53b9321b6ad4c4ca456623ce014e5ef: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_C848BFFB: {r: 0.25, g: 0.25, b: 0, a: 0}
