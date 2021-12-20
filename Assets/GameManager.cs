@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public bool gameStarted=true;
     public GameObject gameOverPanel;
+    public GameObject startGamePanel;
     public Text gameOverText;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MenuControll();
     }
     public void StartGame()
     {
@@ -47,5 +48,21 @@ public class GameManager : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    private void MenuControll()
+    {
+        if(startGamePanel.activeSelf&&Input.GetKeyDown(KeyCode.S))
+        {
+            startGamePanel.SetActive(false);
+            StartGame();
+        }
+        if(gameOverPanel.activeSelf&&Input.GetKeyDown(KeyCode.R))
+        {
+            Retry();
+        }
+        if(gameOverPanel.activeSelf&&Input.GetKeyDown(KeyCode.Q))
+        {
+            QuitGame();
+        }
     }
 }
