@@ -18,8 +18,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     private GameObject mainCamera;
-    private GameManager gameManager;
-    //private bool isStarted=true;
+    private bool isStarted=true;
 
 
     void Start()
@@ -27,12 +26,11 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         mainCamera = Camera.main.gameObject;
-        gameManager=FindObjectOfType<GameManager>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.gameStarted)
+        if (isStarted)
         {
 
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
