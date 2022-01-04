@@ -20,10 +20,10 @@ public class EyeLook : MonoBehaviour
     private Vector3 gazePointWorld;
     private Quaternion targetRotation;
     private Quaternion lastRotation;
-	private float xRotation;
-	private float bodyTurnSpeed=1f;
+    private float xRotation;
+    private float bodyTurnSpeed = 1f;
     private float velocity;
-    private float speedFactor = 0.65f;
+    private float speedFactor = 0.6f;
     private float w;
     private float h;
     private float ratio;
@@ -31,9 +31,13 @@ public class EyeLook : MonoBehaviour
     private int maxRect = 5;
     private int offset = 40;
     private int i;
+    private PlayerMovement playerMovement;
+    private GameManager gameManager;
     public void Start()
     {
+        gameManager=FindObjectOfType<GameManager>();
         this.player = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = FindObjectOfType<PlayerMovement>();
         this.w = (float)Screen.width;
         this.h = (float)Screen.height;
         this.ratio = this.w / this.h;
@@ -48,34 +52,44 @@ public class EyeLook : MonoBehaviour
     }
     public void Update()
     {
-        this.lastRotation = this.player.transform.rotation;
-        //GamePadState state = GamePad.GetState(PlayerIndex.One);
-        /*if (state.IsConnected)
-		{
-			this.speedFactor = state.Triggers.Left + 1f;
-		}*/
-        if (Input.GetKeyDown(KeyCode.R))
+        if (!playerMovement.isSittingDown&&gameManager.gameStarted)
         {
-            this.speedFactor = 2f;
+            this.lastRotation = this.player.transform.rotation;
+            //GamePadState state = GamePad.GetState(PlayerIndex.One);
+            /*if (state.IsConnected)
+            {
+                this.speedFactor = state.Triggers.Left + 1f;
+            }*/
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                this.speedFactor = 1.2f;
+            }
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                this.speedFactor = 0.6f;
+            }
+
         }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            this.speedFactor = 1f;
-        }
+
     }
     public void LateUpdate()
     {
-        if (EyeLook.isActive)
+        if (!playerMovement.isSittingDown&&gameManager.gameStarted)
         {
-            this.player.transform.rotation = this.lastRotation;
-            //EyeXGazePoint lastGazePoint = this._gazePointDataComponent.LastGazePoint;
-            //EyeXGazePoint lastGazePoin=TobiiAPI.GetGazePoint();
-            //if (lastGazePoint.IsValid && lastGazePoint.IsWithinScreenBounds)
-            //{
-            if (TobiiAPI.GetGazePoint().IsValid)
-                this.centerCamera(TobiiAPI.GetGazePoint().Screen);
-            //}
+            if (EyeLook.isActive)
+            {
+                this.player.transform.rotation = this.lastRotation;
+                //EyeXGazePoint lastGazePoint = this._gazePointDataComponent.LastGazePoint;
+                //EyeXGazePoint lastGazePoin=TobiiAPI.GetGazePoint();
+                //if (lastGazePoint.IsValid && lastGazePoint.IsWithinScreenBounds)
+                //{
+                if (TobiiAPI.GetGazePoint().IsValid)
+                    this.centerCamera(TobiiAPI.GetGazePoint().Screen);
+                //}
+            }
+
         }
+
     }
     private void centerCamera(Vector2 point)
     {
@@ -93,24 +107,24 @@ public class EyeLook : MonoBehaviour
         //this.player.transform.rotation = Quaternion.Slerp(this.player.transform.rotation, this.targetRotation, Time.deltaTime * this.velocity * this.speedFactor);
 
 
-        
+
         /*if (point.y > h * 0.75f)
             xRotation = -Vector3.Angle(transform.forward, cameraRotationVector);
         else if (point.y < h * 0.25f)
             xRotation = Vector3.Angle(transform.forward, cameraRotationVector);
         else
             xRotation = 0;*/
-		//xRotation=-Vector3.Angle(transform.forward, cameraRotationVector)*Mathf.Pow(((point.y-0.5f*h)/(h*0.5f)),2);
-		xRotation=-10*Mathf.Pow(((point.y-0.5f*h)/(h*0.5f)),1);
-		bodyTurnSpeed=Mathf.Pow(((point.x-0.5f*w)/(w*0.5f)),2);
+        //xRotation=-Vector3.Angle(transform.forward, cameraRotationVector)*Mathf.Pow(((point.y-0.5f*h)/(h*0.5f)),2);
+        xRotation = -10 * Mathf.Pow(((point.y - 0.5f * h) / (h * 0.5f)), 1);
+        bodyTurnSpeed = Mathf.Pow(((point.x - 0.5f * w) / (w * 0.5f)), 2);
         //float xRotation=point.y>h/2? -Vector3.Angle(transform.forward,cameraRotationVector):Vector3.Angle(transform.forward,cameraRotationVector);
         //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         //float rot=Mathf.Lerp(rot,xRotation,0.6f);
-        this.player.transform.rotation = Quaternion.Slerp(this.player.transform.rotation, playerRotationVector, Time.deltaTime * this.velocity * bodyTurnSpeed*this.speedFactor);
-		float camXrot=(transform.localEulerAngles.x>180?(transform.localEulerAngles.x-360):(transform.localEulerAngles.x))+xRotation;
-		camXrot = Mathf.Clamp(camXrot, -60f, 60f);
-		//Debug.Log("xRot:"+xRotation +", camXrot:"+camXrot+", localRotation:"+transform.localEulerAngles.x);
-        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(new Vector3(camXrot,0f,0f)), Time.deltaTime*this.velocity*this.speedFactor);
+        this.player.transform.rotation = Quaternion.Slerp(this.player.transform.rotation, playerRotationVector, Time.deltaTime * this.velocity * bodyTurnSpeed * this.speedFactor);
+        float camXrot = (transform.localEulerAngles.x > 180 ? (transform.localEulerAngles.x - 360) : (transform.localEulerAngles.x)) + xRotation;
+        camXrot = Mathf.Clamp(camXrot, -60f, 60f);
+        //Debug.Log("xRot:"+xRotation +", camXrot:"+camXrot+", localRotation:"+transform.localEulerAngles.x);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(new Vector3(camXrot, 0f, 0f)), Time.deltaTime * this.velocity * this.speedFactor);
 
 
         //this.transform.rotation=Quaternion.Slerp(this.transform.rotation, cameraRotationVector, Time.deltaTime * this.velocity * this.speedFactor);

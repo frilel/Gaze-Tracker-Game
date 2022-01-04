@@ -15,12 +15,12 @@ public class GazeAwareTest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (gazeAware.HasGazeFocus)
 			{
 				Debug.Log("dd");
-                slider.value+=0.001f;
+                slider.value+=0.01f;
 			}
         
     }
