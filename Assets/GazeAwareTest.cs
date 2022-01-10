@@ -19,8 +19,8 @@ public class GazeAwareTest : MonoBehaviour
     {
         if (gazeAware.HasGazeFocus)
 			{
-				Debug.Log("dd");
-                slider.value+=0.01f;
+				//Debug.Log("dd");
+                slider.value+=0.0035f;
 			}
         
     }

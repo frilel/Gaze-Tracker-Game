@@ -15,11 +15,13 @@ public class UI_Controller : MonoBehaviour
     private Camera mainCamera;
     private GameManager gameManager;
     public GameObject shootButton;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
         gameManager = FindObjectOfType<GameManager>();
+        audioManager=FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -64,6 +66,10 @@ public class UI_Controller : MonoBehaviour
                 }
                 //CheckTarget();
             }
+            /*if(!audioManager.lockAudio.isPlaying)
+            {
+                audioManager.lockAudio.Play();
+            }*/
         }
         else
         {

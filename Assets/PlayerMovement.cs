@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject mainCamera;
     private GameManager gameManager;
     private Animator animator;
+    private AudioManager audioManager;
 
 
     void Start()
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         animator=GetComponent<Animator>();
         animator.enabled=false;
+        audioManager=FindObjectOfType<AudioManager>();
     }
     // Update is called once per frame
     void Update()
@@ -63,7 +65,14 @@ public class PlayerMovement : MonoBehaviour
                     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 }
                 velocity.y += gravity * Time.deltaTime;
-
+                if(move!=Vector3.zero&&!audioManager.walking.isPlaying)
+                {
+                    audioManager.walking.Play();
+                }
+                else if(move==Vector3.zero)
+                {
+                    audioManager.walking.Stop();
+                }
                 controller.Move(velocity * Time.deltaTime);
 
                 controller.Move(move * speed * Time.deltaTime);
@@ -75,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.position=benchPos.position;
                 transform.LookAt(new Vector3(lookAtPoint.position.x,transform.position.y,lookAtPoint.position.z));
                 mainCamera.transform.localEulerAngles=Vector3.zero;
+                
                 //rotateTo(lookAtPoint);
             }
             else
@@ -89,11 +99,19 @@ public class PlayerMovement : MonoBehaviour
     public void Shoot()
     {
         animator.SetTrigger("Shoot");
+        if(!audioManager.shoot.isPlaying)
+        {
+            audioManager.shoot.Play();
+        }
     }
     public void DrawGun()
     {
         animator.enabled=true;
         animator.SetTrigger("DrawGun");
+        if(!audioManager.drawGun.isPlaying)
+        {
+            audioManager.drawGun.Play();
+        }
     }
     public void GetShot()
     {
@@ -104,6 +122,10 @@ public class PlayerMovement : MonoBehaviour
     public void SitOnBench()
     {
         isSittingDown = true;
+        if(!audioManager.newspaper.isPlaying)
+        {
+            audioManager.newspaper.Play();
+        }
     }
     /*void rotateTo(Transform target)
     {

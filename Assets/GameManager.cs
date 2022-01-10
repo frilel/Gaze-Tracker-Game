@@ -16,11 +16,13 @@ public class GameManager : MonoBehaviour
     public Slider redSlider;
     private bool enemeySuspected = false;
     public GameObject slowMoVolume;
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
     public void EnemySuspect()
     {
@@ -30,6 +32,10 @@ public class GameManager : MonoBehaviour
             enemiesAI[1].SwitchAnimSuspect(0);
             enemiesAI[2].SwitchAnimSuspect(1);
             enemeySuspected = true;
+            if (!audioManager.watchout.isPlaying)
+            {
+                audioManager.watchout.Play();
+            }
         }
 
     }
@@ -42,9 +48,13 @@ public class GameManager : MonoBehaviour
         {
             EnemySuspect();
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             QuitGame();
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 0 && Input.GetKeyDown(KeyCode.Q))
+        {
+            SceneManager.LoadScene(1);
         }
     }
     public void StartGame()
@@ -53,7 +63,11 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator GameOver(int result)//0 wrong, 1 right, 2 spotted
     {
-        enemiesAI[2].GetComponentInChildren<Animator>().speed = 0;
+        if (result == 1)
+        {
+            enemiesAI[2].GetComponentInChildren<Animator>().speed = 0;
+        }
+
         gameStarted = false;
         slowMoVolume.SetActive(false);
         yield return new WaitForSeconds(1);
@@ -63,17 +77,29 @@ public class GameManager : MonoBehaviour
         {
             gameOverTitle.text = "Mission Failed!";
             gameOverText.text = "You killed the wrong guy!";
+            if (!audioManager.failed.isPlaying)
+            {
+                audioManager.failed.Play();
+            }
         }
         else if (result == 1)
         {
             gameOverTitle.text = "Mission Success!";
             gameOverText.text = "Target Eliminated!";
+            if (!audioManager.victory.isPlaying)
+            {
+                audioManager.victory.Play();
+            }
         }
         else
         {
             deathVolume.SetActive(true);
             gameOverTitle.text = "Mission Failed!";
             gameOverText.text = "You have been spotted and got shot!";
+            if (!audioManager.failed.isPlaying)
+            {
+                audioManager.failed.Play();
+            }
         }
     }
     public void QuitGame()
@@ -82,8 +108,17 @@ public class GameManager : MonoBehaviour
     }
     public void Retry()
     {
-        Time.timeScale=1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+        audioManager.SlowMoAudio();
+        if (SceneManager.GetActiveScene().buildIndex != 3)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
+
     }
     private void MenuControll()
     {
